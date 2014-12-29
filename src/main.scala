@@ -1,5 +1,5 @@
 object main	{
-	import classes._, countries._, globalVar._
+	import classes._, game_manager._, countries._, globalVar._;
 	//Move these to functions
 	def pickNation() =	{
 		var retry = false;
@@ -16,13 +16,15 @@ object main	{
 				retry = true;
 				println("Invalid choice. Try again");
 			}
-		} while (retry)
+		} while (retry);
 		println("You chose to play as: " + player.Name);
-	}
+	};
 	//^ Move these to functions.
 	
 	def main(args: Array[String]) =	{
+		var gm = new gm();
 		pickNation();
+		
 		
 	}
 }

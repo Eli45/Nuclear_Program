@@ -7,18 +7,18 @@ object countries	{
 		
 		def attack(enemy:country, nukes:Int) =	{
 			
-		}
+		};
 		def setNicks(names:List[String])	{
 			Nicks = names;
 		}
 	
-	}
+	};
 	
-	var usa = new country("The United States of America", 	237000000, 23368);
-	var sov = new country("The Soviet Union", 				277700000, 39197);
-	var fra = new country("France", 						56830000, 	 360);
-	var bri = new country("The United Kingdom", 			56550000, 	 422);
-	var chi = new country("China", 							1051000000,  243);
+	var usa = new country("The United States of America", 237000000, 23368);
+	var sov = new country("The Soviet Union", 277700000, 39197);
+	var fra = new country("France", 56830000, 360);
+	var bri = new country("The United Kingdom", 56550000, 422);
+	var chi = new country("China", 1051000000, 243);
 	//Add more.
 	
 	//NICKS IN LOWER CASE: CHANGE USERINPUT TO LOWERCASE BEFORE CHECKING FOR NICKS.
