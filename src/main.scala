@@ -1,5 +1,5 @@
 object main	{
-	import classes._, countries._, publicVar._
+	import classes._, countries._, globalVar._
 	//Move these to functions
 	def pickNation() =	{
 		var retry = false;

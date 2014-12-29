@@ -1,4 +1,4 @@
-object publicVar	{
+object globalVar	{
 	import countries._
 	var nuclear_states:List[country] = List(usa, sov, fra, bri, chi);
 	var untargetable_states:List[country] = null; //Change based on what player nation is.
