@@ -1,3 +1,4 @@
 TODO: 
   Update nicknames for all countries especially the nuclear ones.
   add more non nuclear countries and udpate their placeholder 0 values.
+  pretty much everything
