@@ -1,6 +1,7 @@
 BUILD v0.0.0.15:
 created new file: ChangeLog.txt
-created new file: functions.scala
+created new file: functions.scala:
+	moved pickNation(), check_untargetable_states() from main.scala to functions.scala.
 
 new class in countries.scala:
 	non_nuke_country: to be used for countries with no nuclear arms.
