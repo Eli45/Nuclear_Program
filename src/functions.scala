@@ -5,7 +5,7 @@ object functions	{
 		var retry = false;
 		do	{
 			retry = false;
-			println("What nuclear powered nation would you like to play as?\nChoices include: United States, United Kingdom, France, China, Soviet Union.");
+			println("Input nuclear power desired to simulate,\nChoices include: United States, United Kingdom, France, China, Soviet Union.");
 			var r = readLine().toLowerCase;
 			if (usa.Nicks.contains(r))		{ player = usa; untargetable_states = List(usa); }
 			else if (sov.Nicks.contains(r))	{ player = sov; untargetable_states = List(sov); }
@@ -14,11 +14,12 @@ object functions	{
 			else if (chi.Nicks.contains(r))	{ player = chi; untargetable_states = List(chi); }
 			else	{
 				retry = true;
-				println("Invalid choice. Try again");
+				println("Invalid choice. Retry.");
 			}
 		} while (retry);
-		println("You chose to play as: " + player.Name);
+		println("Now simulating: " + player.Name);
 	};
+	
 	//Put the below inside the attack country function(to be added later.)
 	def check_untargetable_states(enemy:String):Boolean =	{
 		var valid = true;
@@ -27,10 +28,10 @@ object functions	{
 		}
 		return valid;
 	};
+	
 	//when checking: if valid not true then retry;
 	def convert_non_nuclear_state_to_nuclear(non_nuclear_state:non_nuke_country, nukes:Int):country =	{
-		var new_country = new country(non_nuclear_state.Name, non_nuclear_state.Pop , nukes);
-		return new_country;
-	}
+		return new country(non_nuclear_state.Name, non_nuclear_state.Pop , nukes);
+	};
 	//^ Move these to functions.
 }

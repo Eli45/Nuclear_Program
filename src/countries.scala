@@ -41,11 +41,33 @@ object countries	{
 			Nicks = _Nicks;
 		}
 	};
-	var wger = new non_nuke_country("West Germany", 61020000); //Check this for validity.
-	var eger = new non_nuke_country("East Germany", 16568000); //Population estimate.
+	//Reorganize these into west aligned vs east aligned or region by region basis.
+	var wgr = new non_nuke_country("West Germany", 61020000); //Check this for validity.
+	var egr = new non_nuke_country("East Germany", 16568000); //Population estimate.
+	//add nicks for all below
 	var bel = new non_nuke_country("Belgium", 0);			   //All these have placeholder populations.
 	var hol = new non_nuke_country("The Netherlands", 0);
 	var pol = new non_nuke_country("Poland", 0);
+	//new
+	var swi = new non_nuke_country("Switzerland", 0);
+	var ita = new non_nuke_country("Italy", 0);
+	var yug = new non_nuke_country("Yugoslavia", 0);
+	var aus = new non_nuke_country("Austria", 0);
+	var spa = new non_nuke_country("Spain", 0);
+	var por = new non_nuke_country("Portugal", 0);
+	var alb = new non_nuke_country("Albania", 0);
+	var bul = new non_nuke_country("Bulgaria", 0);
+	var rom = new non_nuke_country("Romania", 0);
+	var tur = new non_nuke_country("Turkey", 0);
+	var nor = new non_nuke_country("Norway", 0);
+	var swe = new non_nuke_country("Sweden", 0);
+	var fin = new non_nuke_country("Finland", 0);
+	var ire = new non_nuke_country("Ireland", 0);
+	var ice = new non_nuke_country("Iceland", 0);
+	var mor = new non_nuke_country("Morocco", 0);
+	var alg = new non_nuke_country("Algeria", 0);
+	var tun = new non_nuke_country("Tunisia", 0);
+	var lib = new non_nuke_country("Libya", 0);
 	
 	
 	private val nonNukeNicks:List[List[String]] = List(

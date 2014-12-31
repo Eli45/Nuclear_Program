@@ -1,8 +1,9 @@
 object main	{
-	import classes._, game_manager._, countries._, globalVar._, functions._;
+	import game_manager._, countries._, globalVar._, functions._, releases._;
 	
 	def main(args: Array[String]) =	{
 		var gm = new gm();
+		println("Running release version [" + versionStr + "] of nuclear command simulation.");
 		pickNation();
 		while (player.Pop > 0)	{
 			gm.exec_player_events();

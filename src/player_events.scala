@@ -8,9 +8,24 @@ object player_events	{
 		else if (player.Name == "China")					{ chi_events(); } 
 	};
 	//Private may or may not work in this scenario. In the event of any errors check this first.
-	private def us_events() =	{};
-	private def sov_events() =	{};
-	private def fra_events() =	{};
-	private def bri_events() =	{};
-	private def chi_events() =	{}
+	private final def us_events() =	{
+	  
+	  
+	};
+	private final def sov_events() =	{
+	  
+	  
+	};
+	private final def fra_events() =	{
+	  
+	  
+	};
+	private final def bri_events() =	{
+	  
+	  
+	};
+	private final def chi_events() =	{
+	  
+	  
+	};
 }

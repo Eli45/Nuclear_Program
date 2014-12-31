@@ -1,5 +1,5 @@
 object game_manager	{
-	import countries._;
+	import countries._, globalVar._;
 	class gm()	{	//game_manager
 		var Defcon = 5; //Lowest level of readiness. Possibly move to specific country basis.
 		var Month = 1;
@@ -21,7 +21,7 @@ object game_manager	{
 		
 		def exec_scripted_events() =	{
 			import scripted_events._;
-			scripted_events(this);
+			scripted_events(this, player);
 		};
 		
 		def exec_player_events() =	{
@@ -38,7 +38,7 @@ object game_manager	{
 			cntry.Name = null;
 			cntry.Pop = 0;
 			cntry.Nicks = null;
-		}
+		};
 	}
 	
 }
