@@ -1,11 +1,58 @@
-#all nations should have a different scripted story in their timelines with small major and multiple minor changes that can occur every differently each time you play.
+#all nations should have a different scripted story in their timelines with, 
+#small major and multiple minor changes that can occur every differently each time you play.
+
 
 USA:
+  1/1/1985:
+  1/2/1985:
+  1/3/1985:
+  1/4/1985:
+  1/5/1985:
+  1/6/1985:
+  1/7/1985:
+  1/8/1985:
+  1/9/1985:
 
 Soviet Union:
+  1/1/1985:
+  1/2/1985:
+  1/3/1985:
+  1/4/1985:
+  1/5/1985:
+  1/6/1985:
+  1/7/1985:
+  1/8/1985:
+  1/9/1985:
 
 United Kingdom:
+  1/1/1985:
+  1/2/1985:
+  1/3/1985:
+  1/4/1985:
+  1/5/1985:
+  1/6/1985:
+  1/7/1985:
+  1/8/1985:
+  1/9/1985:
 
 France:
+  1/1/1985:
+  1/2/1985:
+  1/3/1985:
+  1/4/1985:
+  1/5/1985:
+  1/6/1985:
+  1/7/1985:
+  1/8/1985:
+  1/9/1985:
 
 China:
+  1/1/1985:
+  1/2/1985:
+  1/3/1985:
+  1/4/1985:
+  1/5/1985:
+  1/6/1985:
+  1/7/1985:
+  1/8/1985:
+  1/9/1985:
