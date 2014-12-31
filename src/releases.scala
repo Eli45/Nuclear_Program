@@ -1,15 +1,19 @@
 object releases	{
 	class version(major:Int, minor:Int, patch1:Int, patch2:Int)	{
-		final val MAJOR = major;
-		final val MINOR = minor;
-		final val PATCH1 = patch1;
-		final val PATCH2 = patch2;
+		private final val MAJOR = major;
+		private final val MINOR = minor;
+		private final val PATCH1 = patch1;
+		private final val PATCH2 = patch2;
+		final val versionStr = release.MAJOR + "." + release.MINOR + "." + release.PATCH1 + "." + release.PATCH2;
 	};
-	final val release = new version(0, 0, 1, 0);
-	final val versionStr = release.MAJOR + "." + release.MINOR + "." + release.PATCH1 + "." + release.PATCH2;
+	final val release = new version(0, 0, 1, 1);
+	
 };
 
 /** After patch v0.0.0.15 all changes are to be stored here:
+
+BUILD v0.0.1.1:
+	Slightly changes releases.scala version class.
 
 BUILD v0.0.1.0:
 deleted file(s):

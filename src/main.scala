@@ -3,7 +3,7 @@ object main	{
 	
 	def main(args: Array[String]) =	{
 		var gm = new gm();
-		println("Running release version [" + versionStr + "] of nuclear command simulation.");
+		println("Running release version [" + release.versionStr + "] of nuclear command simulation.");
 		pickNation();
 		while (player.Pop > 0)	{
 			gm.exec_player_events();
