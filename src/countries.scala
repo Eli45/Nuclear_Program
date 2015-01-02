@@ -53,13 +53,17 @@ object countries	{
 	var ita = new non_nuke_country("Italy", 0);
 	var yug = new non_nuke_country("Yugoslavia", 0);
 	var aus = new non_nuke_country("Austria", 0);
+	var lux = new non_nuke_country("Luxembourg", 0);
 	var spa = new non_nuke_country("Spain", 0);
 	var por = new non_nuke_country("Portugal", 0);
 	var alb = new non_nuke_country("Albania", 0);
 	var bul = new non_nuke_country("Bulgaria", 0);
 	var rom = new non_nuke_country("Romania", 0);
+	var cze = new non_nuke_country("Czechoslovakia", 0);
+	var hun = new non_nuke_country("Hungary", 0);
 	var tur = new non_nuke_country("Turkey", 0);
 	var nor = new non_nuke_country("Norway", 0);
+	var den = new non_nuke_country("Denmark", 0);
 	var swe = new non_nuke_country("Sweden", 0);
 	var fin = new non_nuke_country("Finland", 0);
 	var ire = new non_nuke_country("Ireland", 0);
@@ -68,10 +72,12 @@ object countries	{
 	var alg = new non_nuke_country("Algeria", 0);
 	var tun = new non_nuke_country("Tunisia", 0);
 	var lib = new non_nuke_country("Libya", 0);
+	var gre = new non_nuke_country("Greece", 0);
 	
 	
 	private val nonNukeNicks:List[List[String]] = List(
 	List("west germany", "west germans", "wger"),	//West germany.
 	List("east germany", "east germans", "eger")	//East germany.
 	);
+	private val nonNukeCountries:List[non_nuke_country] = List();
 }

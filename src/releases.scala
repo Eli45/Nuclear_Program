@@ -12,8 +12,47 @@ object releases	{
 
 /** After patch v0.0.0.15 all changes are to be stored here:
 
+BUILD v0.0.2.0:
+created in file countries.scala:
+	new countries:
+	Denmark
+	Luxembourg
+	Greece
+
+	Hungary
+	Czechoslovakia
+	
+created in file globalVar.scala:
+	NATO and Warsaw pact:
+		NATO:
+			USA
+			UK
+			France
+			West Germany
+			Netherlands
+			Belgium
+			Luxembourg
+			Norway
+			Italy
+			Spain
+			Portugal
+			Iceland
+			Turkey
+			Greece
+		Warsaw Pact:
+			Soviet Union
+			East Germany
+			Bulgaria
+			Romania
+			Czechoslovakia
+			Hungary
+	
+---------------
+
 BUILD v0.0.1.1:
-	Slightly changes releases.scala version class.
+Slightly changes releases.scala version class.
+
+---------------
 
 BUILD v0.0.1.0:
 deleted file(s):
