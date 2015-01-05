@@ -4,25 +4,25 @@ object countries	{
 		var Pop = _Population;
 		var Nukes = _Nukes;
 		var Nicks:List[String] = null;
-		
+
 		def attack(enemy:country, nukes:Int) =	{
-			
+
 		};
 		def setNicks(names:List[String])	{
 			Nicks = names;
 		}
-	
+
 	};
-	
+
 	var usa = new country("The United States of America", 237000000, 23368);
 	var sov = new country("The Soviet Union", 277700000, 39197);
 	var fra = new country("France", 56830000, 360);
 	var bri = new country("The United Kingdom", 56550000, 422);
 	var chi = new country("China", 1051000000, 243);
 	//Add more.
-	
+
 	//NICKS IN LOWER CASE: CHANGE USERINPUT TO LOWERCASE BEFORE CHECKING FOR NICKS.
-	private val usaNicks = List("usa", "united states", "us", "america", "the united states of america");
+	private val usaNicks = List("usa", "united states", "us", "america", "the united states of america", "united states of america");
 	private val sovNicks = List("sov", "rus", "russia", "soviets", "soviet union", "russian federation", "the soviet union");
 	private val fraNicks = List("fra", "france", "frogs", "retreaters");
 	private val briNicks = List("bri", "britain", "united kingdom", "england", "scotland", "north ireland", "wales", "the united kingdom");
@@ -32,7 +32,7 @@ object countries	{
 	fra.setNicks(fraNicks);
 	bri.setNicks(briNicks);
 	chi.setNicks(chiNicks);
-	
+
 	class non_nuke_country(_Name:String, _Population:Long)	{
 		var Name = _Name;
 		var Pop = _Population;
@@ -73,11 +73,21 @@ object countries	{
 	var tun = new non_nuke_country("Tunisia", 0);
 	var lib = new non_nuke_country("Libya", 0);
 	var gre = new non_nuke_country("Greece", 0);
-	
-	
+	//New 2015-01-05
+	var per = new non_nuke_country("Iran", 0);
+	var irq = new non_nuke_country("Iraq", 0);
+	var syr = new non_nuke_country("Syria", 0);
+	var isr = new non_nuke_country("Israel", 0);
+	var pal = new non_nuke_country("Palestine", 0);
+	var jor = new non_nuke_country("Jordan", 0);
+	var afg = new non_nuke_country("Afghanistan", 0);
+	var pak = new non_nuke_country("Pakistan", 0);
+	var ind = new non_nuke_country("India", 0);
+
+
 	private val nonNukeNicks:List[List[String]] = List(
 	List("west germany", "west germans", "wger"),	//West germany.
 	List("east germany", "east germans", "eger")	//East germany.
 	);
 	private val nonNukeCountries:List[non_nuke_country] = List();
-}
+};

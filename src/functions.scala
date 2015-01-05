@@ -1,6 +1,6 @@
 object functions	{
 	import globalVar._, countries._;
-	//Move these to functions
+	
 	def pickNation() =	{
 		var retry = false;
 		do	{
@@ -20,18 +20,39 @@ object functions	{
 		println("Now simulating: " + player.Name);
 	};
 	
-	//Put the below inside the attack country function(to be added later.)
-	def check_untargetable_states(enemy:String):Boolean =	{
-		var valid = true;
-		for (i <- 0 to untargetable_states.length - 1)	{
-			if (untargetable_states(i).Name == enemy)	{ valid = false; }
+	/* --- Statistics functions --- */
+	def stats_start() =	{
+		println("Type in a command to view statistics and other information. (Type 'help' to see a list of commands)")
+		var repeat = true;
+		while (repeat)	{
+			var r = readLine().toLowerCase;
+			if (r == "help")	{
+				println("'help': Displays this menu.")		  
+				println("'population': Displays statistics on the world populations.")
+				println("'nukes': Displays statistics on nukes fired and casualties.")
+				println("'timeline': Displays events occured in game.")
+				println("'replay': Re-sets all game statistics, restarts the game, and allows you to pick a new country.")
+				println("'terminate': Terminates the program.")
+			}
+			else if (r == "population")	{
+			  
+			}
+			else if (r == "nukes")	{
+			  
+			}
+			else if (r == "timeline")	{
+			  
+			}
+			else if (r == "replay")	{
+			  
+			}
+			else if (r == "terminate")	{
+				repeat = false;
+				println("Simulation terminated");
+			}
+			else	{
+				println(r + " is not a valid command. Please try again.");
+			}
 		}
-		return valid;
-	};
-	
-	//when checking: if valid not true then retry;
-	def convert_non_nuclear_state_to_nuclear(non_nuclear_state:non_nuke_country, nukes:Int):country =	{
-		return new country(non_nuclear_state.Name, non_nuclear_state.Pop , nukes);
-	};
-	//^ Move these to functions.
-}
+	}	
+};
