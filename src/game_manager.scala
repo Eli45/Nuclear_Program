@@ -65,8 +65,7 @@ object game_manager	{
 			cntry.Nicks = null;
 		};
 
-		//GM Controlled turn input options etc:
-		//Put the below inside the attack country function(to be added later.)
+		//Starts current turn and waits for input commands then promptly calls the correct method based on input.
 		def start_turn() =	{
 			this.DefconCheck();
 			println("Press enter to start your turn.");
@@ -100,7 +99,7 @@ object game_manager	{
 			//end turn
 		};
 
-		def choose_target() =	{
+		private def choose_target() =	{
 			var can_attack = false;
 			if (enemy_states_nuclear.nonEmpty)	{
 				println("You are at war with these nuclear countries: " + this.printList_nuclear(enemy_states_nuclear));
@@ -200,6 +199,8 @@ object game_manager	{
 		};
 		//As I said, very wasteful. MUST REVISE.
 		
+		//MUST REVISE BEFORE CONTINUING DEVELOPMENT OR ELSE THERE WILL BE TWO METHODS FOR EVERYTHING.
+		//Which there shouldn't be because they each contain the same variables other than nukes.
 		def attack(arg:country, nukes:Int) =	{
 		  
 		};
@@ -228,6 +229,7 @@ object game_manager	{
 			}
 		};
 
+		//This is sort of redundant if I'm going down the path of only being able to target those that you are at 'war' with. Should be changed.
 		def check_untargetable_states(enemy:String):Boolean =	{
 			var valid = true;
 			for (i <- 0 to untargetable_states.length - 1)	{
@@ -235,8 +237,9 @@ object game_manager	{
 			}
 			return valid;
 		};
-
 		//when checking: if valid not true then retry;
+		
+		
 		def convert_non_nuclear_state_to_nuclear(non_nuclear_state:non_nuke_country, nukes:Int):country =	{
 			return new country(non_nuclear_state.Name, non_nuclear_state.Pop , nukes);
 		};
