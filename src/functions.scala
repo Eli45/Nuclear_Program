@@ -33,18 +33,24 @@ object functions {
 				println( "'timeline': Displays events occured in game." )
 				println( "'replay': Re-sets all game statistics, restarts the game, and allows you to pick a new country." )
 				println( "'terminate': Terminates the program." )
-			} else if ( r == "population" ) {
+			}
+			else if ( r == "population" ) {
 
-			} else if ( r == "nukes" ) {
+			}
+			else if ( r == "nukes" ) {
 
-			} else if ( r == "timeline" ) {
+			}
+			else if ( r == "timeline" ) {
 
-			} else if ( r == "replay" ) {
+			}
+			else if ( r == "replay" ) {
 
-			} else if ( r == "terminate" ) {
+			}
+			else if ( r == "terminate" ) {
 				repeat = false;
 				println( "Simulation terminated" );
-			} else {
+			}
+			else {
 				println( r + " is not a valid command. Please try again." );
 			}
 		}

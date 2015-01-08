@@ -1,19 +1,19 @@
 object countries {
 	class country( _Name: String, _Population: Long, _Nukes: Int ) { //Nuclear countries.
-		var Name						= _Name;
-		var Pop							= _Population;
-		var Nukes						= _Nukes;
-		var max_nukes				= 0; //Determined by Defcon level.
-		var Defcon						= 5; //Lowest level of readiness.
-		var Nicks: List[String]		= null;
+		var Name = _Name;
+		var Pop = _Population;
+		var Nukes = _Nukes;
+		var max_nukes = 0; //Determined by Defcon level.
+		var Defcon = 5; //Lowest level of readiness.
+		var Nicks: List[String] = null;
 
 		def attack( enemy: country, nukes: Int ) = {
 
 		};
-		def setNicks( names: List[String] )	= Nicks = names;
-		def update_max_nukes( max: Int )	= this.max_nukes = max;
-		def give_nukes( nukes: Int )			= this.Nukes += nukes;
-		def set_nukes( nukes: Int )				= this.Nukes = nukes;
+		def setNicks( names: List[String] ) = Nicks = names;
+		def update_max_nukes( max: Int ) = this.max_nukes = max;
+		def give_nukes( nukes: Int ) = this.Nukes += nukes;
+		def set_nukes( nukes: Int ) = this.Nukes = nukes;
 	};
 
 	var usa = new country( "The United States of America", 237000000, 23368 );

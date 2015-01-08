@@ -1,9 +1,9 @@
 object game_manager {
 	import countries._, globalVar._;
 	class gm() { //game_manager
-		var Month							= 1;
-		var Year							= 1985;
-		var past_dates: List[String]	= List( "1/1985" );
+		var Month = 1;
+		var Year = 1985;
+		var past_dates: List[String] = List( "1/1985" );
 		/* ^ Update by:
 		 * past_dates = past_dates :+ (Month.toString + "/" + Year.toString);
 		 */
@@ -19,19 +19,24 @@ object game_manager {
 		private def DefconCheck( cntry: country ) = {
 			if ( cntry.Defcon > 5 ) {
 				cntry.Defcon = 5;
-			}; else if ( cntry.Defcon < 1 ) {
+			};
+			else if ( cntry.Defcon < 1 ) {
 				cntry.Defcon = 1;
 			};
 
 			if ( cntry.Defcon == 5 ) {
 				cntry.update_max_nukes( 0 );
-			}; else if ( cntry.Defcon == 4 ) {
+			};
+			else if ( cntry.Defcon == 4 ) {
 				cntry.update_max_nukes( 15 );
-			}; else if ( cntry.Defcon == 3 ) {
+			};
+			else if ( cntry.Defcon == 3 ) {
 				cntry.update_max_nukes( 50 );
-			}; else if ( cntry.Defcon == 2 ) {
+			};
+			else if ( cntry.Defcon == 2 ) {
 				cntry.update_max_nukes( 300 );
-			}; else if ( cntry.Defcon == 1 ) {
+			};
+			else if ( cntry.Defcon == 1 ) {
 				cntry.update_max_nukes( 2000 );
 			}
 		};
@@ -73,19 +78,24 @@ object game_manager {
 				var r = readLine().toLowerCase;
 				if ( r == "help" ) { //prints commands available for use to the player.
 					println( "To Add Later" );
-				} else if ( r == "nuke" && can_nuke ) {
+				}
+				else if ( r == "nuke" && can_nuke ) {
 					if ( enemy_states.nonEmpty && player.Defcon != 5 ) {
 						can_nuke = false;
 						this.choose_target();
-					} else if ( player.Defcon == 5 ) {
+					}
+					else if ( player.Defcon == 5 ) {
 						println( "You cannot attack any states at this time due your defcon level of 5" );
-					} else {
+					}
+					else {
 						println( "You cannot attack any states at this time." );
 					}
-				} else if ( r == "end" ) {
+				}
+				else if ( r == "end" ) {
 					println( "Turn ended." );
 					repeat = false;
-				} else {
+				}
+				else {
 					println( r + " is an unrecognized command." );
 				}
 			}
@@ -113,7 +123,8 @@ object game_manager {
 					if ( r != "" ) {
 						println( "No nuclear weapons exchanged currently." );
 						repeat = false;
-					} else {
+					}
+					else {
 						var found_target = false;
 						for ( i <- 0 to enemy_states.length - 1 ) { //Checks for nuclear targets and attacks them.
 							if ( enemy_states( i ).Nicks.contains( r ) ) {
@@ -141,15 +152,18 @@ object game_manager {
 					if ( r > player.max_nukes ) {
 						println( s"$r is greater than the maximum number of nuclear weapons you can launch. (" + player.max_nukes + ")" );
 						repeat = true;
-					} else if ( r > player.Nukes ) {
+					}
+					else if ( r > player.Nukes ) {
 						println( s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes );
 						repeat = true;
-					} else {
+					}
+					else {
 						repeat = false;
 						this.attack( enemy, r );
 					};
 
-				} catch {
+				}
+				catch {
 					case e: Exception => println( "Invalid input. Please retry." ); repeat = true;
 				}
 			};
@@ -163,7 +177,8 @@ object game_manager {
 			for ( i <- 0 to arg.length - 1 ) {
 				if ( i != arg.length - 1 ) {
 					print( arg( i ).Name + ", " );
-				} else {
+				}
+				else {
 					print( "and " + arg( i ).Name + "." );
 				}
 			}
