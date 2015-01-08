@@ -1,14 +1,13 @@
-object releases	{
-	class version(major:Int, minor:Int, patch1:Int, patch2:Int)	{
-		private final val MAJOR = major;
-		private final val MINOR = minor;
-		private final val PATCH1 = patch1;
-		private final val PATCH2 = patch2;
+object releases {
+	class version( major: Int, minor: Int, patch1: Int, patch2: Int ) {
+		private final val MAJOR	= major;
+		private final val MINOR	= minor;
+		private final val PATCH1	= patch1;
+		private final val PATCH2	= patch2;
 		final val vers = this.MAJOR + "." + this.MINOR + "." + this.PATCH1 + "." + this.PATCH2;
 	};
-	final val release = new version(0, 0, 3, 0);
-};
-
+	final val release = new version( 0, 0, 3, 0 );
+}; 
 /** Changelogs:
 
 BUILD v0.0.3.0:
@@ -157,4 +156,4 @@ new function in game_manager.scala:
 new function in functions.scala:
 	convert_non_nuclear_state_to_nuclear:
 
-**/
+**/ 
