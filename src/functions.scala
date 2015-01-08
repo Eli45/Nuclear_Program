@@ -7,7 +7,7 @@ object functions	{
 			retry = false;
 			println("Input nuclear power desired to simulate,\nChoices include: United States, United Kingdom, France, China, Soviet Union.");
 			var r = readLine().toLowerCase;
-			if (usa.Nicks.contains(r))		{ player = usa; untargetable_states = List(usa); }
+			if (usa.Nicks.contains(r))		{ player = usa; untargetable_states = List(usa); }	//Alter this to include NATO / Warsaw pact.
 			else if (sov.Nicks.contains(r))	{ player = sov; untargetable_states = List(sov); }
 			else if (fra.Nicks.contains(r))	{ player = fra; untargetable_states = List(fra); }
 			else if (bri.Nicks.contains(r))	{ player = bri; untargetable_states = List(bri); }

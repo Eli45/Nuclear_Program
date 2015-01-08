@@ -9,7 +9,7 @@ object player_events	{
 	};
 	//Private may or may not work in this scenario. In the event of any errors check this first.
 	private final def us_events() =	{
-	  
+		
 	  
 	};
 	private final def sov_events() =	{

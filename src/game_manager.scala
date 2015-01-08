@@ -1,11 +1,9 @@
 object game_manager	{
 	import countries._, globalVar._;
 	class gm()	{	//game_manager
-		var Defcon = 5; //Lowest level of readiness. Possibly move to specific country basis.
 		var Month = 1;
 		var Year = 1985;
 		var past_dates:List[String] = List("1/1985");
-		private var max_nukes = 0;
 		/* ^ Update by:
 		 * past_dates = past_dates :+ (Month.toString + "/" + Year.toString);
 		 */
@@ -18,28 +16,28 @@ object game_manager	{
 			this.past_dates = this.past_dates :+ (this.Month.toString + "/" + this.Year.toString);
 		};
 		
-		private def DefconCheck() =	{
-		  if (this.Defcon > 5)	{
-		    this.Defcon = 5;
+		private def DefconCheck(cntry:country) =	{
+		  if (cntry.Defcon > 5)	{
+		    cntry.Defcon = 5;
 		  };
-		  else if (this.Defcon < 1)	{
-		    this.Defcon = 1;
+		  else if (cntry.Defcon < 1)	{
+		    cntry.Defcon = 1;
 		  };
 		  
-		  if (this.Defcon == 5)	{
-		    this.max_nukes = 0;
+		  if (cntry.Defcon == 5)	{
+		   cntry.update_max_nukes(0);
 		  };
-		  else if (this.Defcon == 4)	{
-		    this.max_nukes = 15;
+		  else if (cntry.Defcon == 4)	{
+		    cntry.update_max_nukes(15);
 		  };
-		  else if (this.Defcon == 3)	{
-		    this.max_nukes = 50;
+		  else if (cntry.Defcon == 3)	{
+		    cntry.update_max_nukes(50);
 		  };
-		  else if (this.Defcon == 2)	{
-		    this.max_nukes = 300;
+		  else if (cntry.Defcon == 2)	{
+		    cntry.update_max_nukes(300);
 		  };
-		  else if (this.Defcon == 1)	{
-		    this.max_nukes == 2000;
+		  else if (cntry.Defcon == 1)	{
+		    cntry.update_max_nukes(2000);
 		  }
 		};
 
@@ -59,29 +57,34 @@ object game_manager	{
 			cntry.Nukes = 0;
 			cntry.Nicks = null;
 		};
+		
+		/*	DEPRECATED
 		def destroy(cntry:non_nuke_country) =	{
 			cntry.Name = null;
 			cntry.Pop = 0;
 			cntry.Nicks = null;
 		};
+		*/
 
 		//Starts current turn and waits for input commands then promptly calls the correct method based on input.
 		def start_turn() =	{
-			this.DefconCheck();
+			DefconCheck(player);
 			println("Press enter to start your turn.");
 			readLine();
 			println("Turn started. Input commands. (use 'help' for a list of commands.)");
 			var repeat = true;
+			var can_nuke = true;
 			while (repeat)	{
 				var r = readLine().toLowerCase;
 				if (r == "help")	{	//prints commands available for use to the player.
 					println("To Add Later");
 				}
-				else if (r == "nuke")	{
-					if (enemy_states_nuclear.nonEmpty || enemy_states_non_nuke.nonEmpty && this.Defcon != 5)	{
+				else if (r == "nuke" && can_nuke)	{
+					if (enemy_states.nonEmpty && player.Defcon != 5)	{
+						can_nuke = false;
 						this.choose_target();
 					}
-					else if (this.Defcon == 5)	{
+					else if (player.Defcon == 5)	{
 						println("You cannot attack any states at this time due your defcon level of 5");
 					}
 					else	{
@@ -101,14 +104,16 @@ object game_manager	{
 
 		private def choose_target() =	{
 			var can_attack = false;
-			if (enemy_states_nuclear.nonEmpty)	{
-				println("You are at war with these nuclear countries: " + this.printList_nuclear(enemy_states_nuclear));
+			if (enemy_states.nonEmpty)	{
+				println("You are at war with these countries: " + this.printList_nuclear(enemy_states));
 				can_attack = true;
-			}
+			};
+			/*	DEPRECATED
 			if (enemy_states_non_nuke.nonEmpty)	{
 				println("You are at war with these non nuclear countries: " + this.printList_non_nuke(enemy_states_non_nuke));
 				can_attack = true;
 			};
+			*/
 			if (can_attack)	{
 				println("Who would you like to attack of these states?\nPressing enter with no input will result in no nuclear exchange.");
 				var repeat = true;
@@ -121,19 +126,11 @@ object game_manager	{
 					}
 					else	{
 					  var found_target = false;
-					  for (i <- 0 to enemy_states_nuclear.length - 1)	{	//Checks for nuclear targets and attacks them.
-					    if (enemy_states_nuclear(i).Nicks.contains(r))	{
+					  for (i <- 0 to enemy_states.length - 1)	{	//Checks for nuclear targets and attacks them.
+					    if (enemy_states(i).Nicks.contains(r))	{
 					      found_target = true;
-					      this.enter_combat(enemy_states_nuclear(i));
+					      this.enter_combat(enemy_states(i));
 					    }
-					  };
-					  if (!found_target)	{
-						  for (i <- 0 to enemy_states_non_nuke.length - 1)	{	//Checks for non_nuclear targets and attacks them
-						    if (enemy_states_non_nuke(i).Nicks.contains(r))	{
-						      found_target = true;
-						      this.enter_combat(enemy_states_non_nuke(i));
-						    }
-						  }
 					  };
 					  if (!found_target)	{	//If we still haven't found a target we display a message and loop again.
 					    println(r + " is not a nation you are at war with. Please try again.");
@@ -147,13 +144,13 @@ object game_manager	{
 		//These enter_combat methods are very wasteful with repeated code but because of the way I've set up  my country/non_nuke_country divide it has to be written like this.
 		//I need to come back later and devise a better way of handling the two different types of enemies.
 		def enter_combat(enemy: country) =	{
-		  println(s"How many nukes would you like to launch?\nYou may launch a maximum number of $max_nukes nuclear weapons.\nYou currently have " + player.Nukes + " nuclear weapons.");
+		  println(s"How many nukes would you like to launch?\nYou may launch a maximum number of " + player.max_nukes + " nuclear weapons.\nYou currently have " + player.Nukes + " nuclear weapons.");
 		  var repeat = true;
 		  	  while (repeat)	{
 			  try	{
 				  var r = readInt();
-				  if (r > max_nukes)	{
-					  println(s"$r is greater than the maximum number of nuclear weapons you can launch. ($max_nukes)");
+				  if (r > player.max_nukes)	{
+					  println(s"$r is greater than the maximum number of nuclear weapons you can launch. ("+player.max_nukes+")");
 					  repeat = true;
 				  }
 				  else if (r > player.Nukes)	{
@@ -172,39 +169,7 @@ object game_manager	{
 			};
 		};
 		
-		def enter_combat(enemy: non_nuke_country) =	{
-		  println(s"How many nukes would you like to launch?\nYou may launch a maximum number of $max_nukes nuclear weapons.\nYou currently have " + player.Nukes + " nuclear weapons.");
-		  var repeat = true;
-		  	  while (repeat)	{
-			  try	{
-				  var r = readInt();
-				  if (r > max_nukes)	{
-					  println(s"$r is greater than the maximum number of nuclear weapons you can launch. ($max_nukes)");
-					  repeat = true;
-				  }
-				  else if (r > player.Nukes)	{
-					  println(s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes);
-					  repeat = true;
-				  }
-				  else	{
-					  repeat = false;
-					   this.attack(enemy, r);
-				  };
-				 
-			  }
-			  catch	{
-			  	  case e:Exception => println("Invalid input. Please retry."); repeat = true;
-			  }
-			};
-		};
-		//As I said, very wasteful. MUST REVISE.
-		
-		//MUST REVISE BEFORE CONTINUING DEVELOPMENT OR ELSE THERE WILL BE TWO METHODS FOR EVERYTHING.
-		//Which there shouldn't be because they each contain the same variables other than nukes.
 		def attack(arg:country, nukes:Int) =	{
-		  
-		};
-		def attack(arg:non_nuke_country, nukes:Int) =	{
 		  
 		};
 
@@ -218,30 +183,20 @@ object game_manager	{
 				}
 			}
 		};
-		final private def printList_non_nuke(arg: List[non_nuke_country]) =	{
-			for (i <- 0 to arg.length - 1)	{
-				if (i != arg.length - 1)	{
-					print(arg(i).Name + ", ");
-				}
-				else	{
-					print("and " + arg(i).Name + ".");
-				}
-			}
-		};
 
 		//This is sort of redundant if I'm going down the path of only being able to target those that you are at 'war' with. Should be changed.
 		def check_untargetable_states(enemy:String):Boolean =	{
-			var valid = true;
 			for (i <- 0 to untargetable_states.length - 1)	{
-				if (untargetable_states(i).Name == enemy)	{ valid = false; }
+				if (untargetable_states(i).Name == enemy)	{ return false; }
 			}
-			return valid;
+			return true;
 		};
 		//when checking: if valid not true then retry;
 		
-		
+		/*	DEPRECATED
 		def convert_non_nuclear_state_to_nuclear(non_nuclear_state:non_nuke_country, nukes:Int):country =	{
 			return new country(non_nuclear_state.Name, non_nuclear_state.Pop , nukes);
 		};
+		*/
 	}
 };

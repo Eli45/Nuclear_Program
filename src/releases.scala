@@ -6,10 +6,30 @@ object releases	{
 		private final val PATCH2 = patch2;
 		final val vers = this.MAJOR + "." + this.MINOR + "." + this.PATCH1 + "." + this.PATCH2;
 	};
-	final val release = new version(0, 0, 2, 5);
+	final val release = new version(0, 0, 3, 0);
 };
 
-/** After patch v0.0.0.15 all changes are to be stored here:
+/** Changelogs:
+
+BUILD v0.0.3.0:
+
+re-did country system so that each country is treated equally under the same class instead of as a separate independent class.
+this solves the problem of requiring method overloading for every method in which we must deal with both nuclear states and non nuclear states.
+
+in countries.scala and game_manager.scala:
+	All countries now treated as the same class.
+	Deprecated non_nuke_country class.
+	moved Defcon variable to a country-by-country basis.
+	moved max_nukes variable to a country-by-country basis.]
+	created method update_max_nukes() for updating max_nukes available to fire.
+	created method set_nukes() for setting the current numbers of nukes available.
+	created method give_nukes() for giving the country ( or taking away ) a specified number of nukes.
+
+in all other files:
+	Fixed various bugs that occurred because of this change.
+	Removed various un-needed variables and methods that are now useless because of this change.
+
+---------------
 
 BUILD v0.0.2.5:
 created in file countries.scala:
@@ -25,7 +45,7 @@ created in file countries.scala:
 		india
 
 in file functions.scala:
-	moved methods choose_target and check_untargetable_states.
+	moved methods choose_target and check_untargetable_states to game_manager.scala.
 
 in file game_manager.scala:
 	created printList() method for printing a list of countries.
@@ -36,7 +56,7 @@ in file game_manager.scala:
 	created DefconCheck() method for checking max number of nukes able to launch depending on Defcon level.
 
 in file functions.scala:
-	created start_states() method for showing statistics of the game to the player at the end of the session.
+	created start_stats() method for showing statistics of the game to the player at the end of the session.
 
 ---------------
 
