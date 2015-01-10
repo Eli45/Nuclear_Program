@@ -1,3 +1,17 @@
+//Note:
+/*
+ * game_manager attack method should take 2 countries: attacker, defender and should direct each of these countries to attack eachother with their respective attack methods within countries.class
+ * gm bug on line 123:	https://github.com/Eli45/Nuclear_Program/blob/master/src/game_manager.scala#L123
+ 	if ( r != "" ) {
+		println( "No nuclear weapons exchanged currently." );
+		repeat = false;
+	}
+ * Should be:
+ 	if ( r == "")	{
+ 		stuff
+ 	}
+*/
+
 object releases {
 	class version( major: Int, minor: Int, patch1: Int, patch2: Int ) {
 		private final val MAJOR = major;
