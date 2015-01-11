@@ -25,4 +25,6 @@ object globalVar {
 		rom,
 		cze,
 		hun );
+	
+	def echo(msg:String) = print(msg+"\n");
 };

@@ -69,15 +69,34 @@ object game_manager {
 		//Starts current turn and waits for input commands then promptly calls the correct method based on input.
 		def start_turn() = {
 			DefconCheck( player );
-			println( "Press enter to start your turn." );
+			if (this.Month == 1 && this.Year == 1985)	{ echo( "Press enter to start your turn." ); };
+			else	{ echo( "Press enter to start the next turn" ); };
 			readLine();
-			println( "Turn started. Input commands. (use 'help' for a list of commands.)" );
+			echo( "Turn started. Input commands. (use 'help' for a list of commands.)" );
 			var repeat = true;
 			var can_nuke = true;
 			while ( repeat ) {
 				var r = readLine().toLowerCase;
-				if ( r == "help" ) { //prints commands available for use to the player.
-					println( "To Add Later" );
+				if ( r.startsWith( "help" ) ) { //prints commands available for use to the player.
+					if ( r == "help" )	{
+						echo( """Options:
+	nuke
+	end
+	help
+	help 'command'
+	terminate""" );	//This is ugly but whatever.
+					};
+					else	{
+						try	{
+							var args = r.split(' ');
+							if (args(1) == "nuke")	{ echo( "Allows the user to choose a hostile state to nuke." ); }
+							else if (args(1) == "end")	{ echo( "Ends the current turn and starts the next month." ); }
+							else if (args(1) == "help")	{ echo( "Shows command options." ); }
+							else if (args(1) == "terminate")	{ echo( "Terminates the simulation." ); }
+						} catch	{
+							case e:Exception => echo("Invalid command.");
+						}
+					}
 				}
 				else if ( r == "nuke" && can_nuke ) {
 					if ( enemy_states.nonEmpty && player.Defcon != 5 ) {
@@ -85,18 +104,22 @@ object game_manager {
 						this.choose_target();
 					}
 					else if ( player.Defcon == 5 ) {
-						println( "You cannot attack any states at this time due your defcon level of 5" );
+						echo( "You cannot attack any states at this time due your defcon level of 5" );
 					}
 					else {
-						println( "You cannot attack any states at this time." );
+						echo( "You cannot attack any states at this time." );
 					}
 				}
 				else if ( r == "end" ) {
-					println( "Turn ended." );
+					echo( "Turn ended." );
 					repeat = false;
 				}
+				else if ( r == "terminate" )	{
+					echo( "Simulation terminated." );
+					while (true)	{};
+				}
 				else {
-					println( r + " is an unrecognized command." );
+					echo( r + " is an unrecognized command." );
 				}
 			}
 			//end turn
@@ -105,23 +128,23 @@ object game_manager {
 		private def choose_target() = {
 			var can_attack = false;
 			if ( enemy_states.nonEmpty ) {
-				println( "You are at war with these countries: " + this.printList_nuclear( enemy_states ) );
+				echo( "You are at war with these countries: " + this.printList_nuclear( enemy_states ) );
 				can_attack = true;
 			};
 			/*	DEPRECATED
 			if (enemy_states_non_nuke.nonEmpty)	{
-				println("You are at war with these non nuclear countries: " + this.printList_non_nuke(enemy_states_non_nuke));
+				echo("You are at war with these non nuclear countries: " + this.printList_non_nuke(enemy_states_non_nuke));
 				can_attack = true;
 			};
 			*/
 			if ( can_attack ) {
-				println( "Who would you like to attack of these states?\nPressing enter with no input will result in no nuclear exchange." );
+				echo( "Who would you like to attack of these states?\nPressing enter with no input will result in no nuclear exchange." );
 				var repeat = true;
 				while ( repeat ) {
 					repeat = false;
 					var r = readLine().toLowerCase;
 					if ( r != "" ) {
-						println( "No nuclear weapons exchanged currently." );
+						echo( "No nuclear weapons exchanged currently." );
 						repeat = false;
 					}
 					else {
@@ -133,7 +156,7 @@ object game_manager {
 							}
 						};
 						if ( !found_target ) { //If we still haven't found a target we display a message and loop again.
-							println( r + " is not a nation you are at war with. Please try again." );
+							echo( r + " is not a nation you are at war with. Please try again." );
 							repeat = true;
 						}
 					}
@@ -144,17 +167,17 @@ object game_manager {
 		//These enter_combat methods are very wasteful with repeated code but because of the way I've set up  my country/non_nuke_country divide it has to be written like this.
 		//I need to come back later and devise a better way of handling the two different types of enemies.
 		def enter_combat( enemy: country ) = {
-			println( s"How many nukes would you like to launch?\nYou may launch a maximum number of " + player.max_nukes + " nuclear weapons.\nYou currently have " + player.Nukes + " nuclear weapons." );
+			echo( s"How many nukes would you like to launch?\nYou may launch a maximum number of " + player.max_nukes + " nuclear weapons.\nYou currently have " + player.Nukes + " nuclear weapons." );
 			var repeat = true;
 			while ( repeat ) {
 				try {
 					var r = readInt();
 					if ( r > player.max_nukes ) {
-						println( s"$r is greater than the maximum number of nuclear weapons you can launch. (" + player.max_nukes + ")" );
+						echo( s"$r is greater than the maximum number of nuclear weapons you can launch. (" + player.max_nukes + ")" );
 						repeat = true;
 					}
 					else if ( r > player.Nukes ) {
-						println( s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes );
+						echo( s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes );
 						repeat = true;
 					}
 					else {
@@ -164,7 +187,7 @@ object game_manager {
 
 				}
 				catch {
-					case e: Exception => println( "Invalid input. Please retry." ); repeat = true;
+					case e: Exception => echo( "Invalid input. Please retry." ); repeat = true;
 				}
 			};
 		};

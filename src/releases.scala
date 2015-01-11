@@ -20,8 +20,16 @@ object releases {
 		private final val PATCH2 = patch2;
 		final val vers = this.MAJOR + "." + this.MINOR + "." + this.PATCH1 + "." + this.PATCH2;
 	};
-	final val release = new version( 0, 0, 3, 0 );
+	final val release = new version( 0, 0, 3, 3 );
 }; /** Changelogs:
+
+BUILD v0.0.3.3:
+in file game_manager.scala:
+	created help option in turn.
+	created terminate option in turn.
+	
+too lazy to do anything please send help.
+
 
 BUILD v0.0.3.0:
 
