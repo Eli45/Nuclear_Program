@@ -93,6 +93,9 @@ object game_manager {
 							else if (args(1) == "end")	{ echo( "Ends the current turn and starts the next month." ); }
 							else if (args(1) == "help")	{ echo( "Shows command options." ); }
 							else if (args(1) == "terminate")	{ echo( "Terminates the simulation." ); }
+							else	{
+								throw new Exception;
+							}
 						} catch	{
 							case e:Exception => echo("Invalid command.");
 						}
