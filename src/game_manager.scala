@@ -176,12 +176,10 @@ object game_manager {
 				try {
 					var r = readInt();
 					if ( r > player.max_nukes ) {
-						echo( s"$r is greater than the maximum number of nuclear weapons you can launch. (" + player.max_nukes + ")" );
-						repeat = true;
+						throw new Exception( s"$r is greater than the maximum number of nuclear weapons you can launch. (" + player.max_nukes + ")" );
 					}
 					else if ( r > player.Nukes ) {
-						echo( s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes );
-						repeat = true;
+						throw new Exception( s"$r is greater than the current number of nuclear weapons you have: " + player.Nukes );
 					}
 					else {
 						repeat = false;
@@ -190,7 +188,7 @@ object game_manager {
 
 				}
 				catch {
-					case e: Exception => echo( "Invalid input. Please retry." ); repeat = true;
+					case e: Exception => echo( "Exception: " + e ); repeat = true;
 				}
 			};
 		};
