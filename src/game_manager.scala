@@ -1,17 +1,20 @@
 object game_manager {
-	import countries._, globalVar._;
-	class gm() { //game_manager
-		var Month = 1;
+	import month._, countries._, globalVar._;
+	class gm(_player:country) { //game_manager
+		var Month = new Month(1);
 		var Year = 1985;
 		var past_dates: List[String] = List( "1/1985" );
+		var player:country = _player;
 		/* ^ Update by:
 		 * past_dates = past_dates :+ (Month.toString + "/" + Year.toString);
 		 */
 
+		def update_player(_player:country) = this.player = _player;
+		
 		def nextTurn() = {
 			this.Month += 1;
 			if ( this.Month > 12 ) {
-				this.Month = 1; this.Year += 1;
+				this.Month.update(1); this.Year += 1;
 			};
 			this.past_dates = this.past_dates :+ ( this.Month.toString + "/" + this.Year.toString );
 		};
@@ -52,8 +55,8 @@ object game_manager {
 		};
 		//destroy probably won't be used.
 		def destroy( cntry: country ) = {
-			cntry.Name = null;
-			cntry.Pop = 0;
+			cntry.Name 	= null;
+			cntry.Pop 	= 0;
 			cntry.Nukes = 0;
 			cntry.Nicks = null;
 		};
@@ -70,9 +73,10 @@ object game_manager {
 		def start_turn() = {
 			DefconCheck( player );
 			if (this.Month == 1 && this.Year == 1985)	{ echo( "Press enter to start your turn." ); };
-			else	{ echo( "Press enter to start the next turn" ); };
+			else										{ echo( "Press enter to start the next turn" ); };
 			readLine();
-			echo( "Turn started. Input commands. (use 'help' for a list of commands.)" );
+			
+			echo( "Turn started, the date is " + this.Month.toString() + s" 1, $Year.\nInput commands. (use 'help' for a list of commands.)" );
 			var repeat = true;
 			var can_nuke = true;
 			while ( repeat ) {
@@ -89,9 +93,9 @@ object game_manager {
 					else	{
 						try	{
 							var args = r.split(' ');
-							if (args(1) == "nuke")	{ echo( "Allows the user to choose a hostile state to nuke." ); }
-							else if (args(1) == "end")	{ echo( "Ends the current turn and starts the next month." ); }
-							else if (args(1) == "help")	{ echo( "Shows command options." ); }
+							if 		(args(1) == "nuke")			{ echo( "Allows the user to choose a hostile state to nuke." ); }
+							else if (args(1) == "end")			{ echo( "Ends the current turn and starts the next month." ); }
+							else if (args(1) == "help")			{ echo( "Shows command options." ); }
 							else if (args(1) == "terminate")	{ echo( "Terminates the simulation." ); }
 							else	{
 								throw new Exception;
@@ -146,7 +150,7 @@ object game_manager {
 				while ( repeat ) {
 					repeat = false;
 					var r = readLine().toLowerCase;
-					if ( r != "" ) {
+					if ( r == "" ) {
 						echo( "No nuclear weapons exchanged currently." );
 						repeat = false;
 					}
@@ -183,7 +187,7 @@ object game_manager {
 					}
 					else {
 						repeat = false;
-						this.attack( enemy, r );
+						this.attack( this.player, enemy, r );
 					};
 
 				}
@@ -193,7 +197,7 @@ object game_manager {
 			};
 		};
 
-		def attack( arg: country, nukes: Int ) = {
+		def attack( country_attacker:country, country_defender:country, nukes: Int ) = {
 
 		};
 

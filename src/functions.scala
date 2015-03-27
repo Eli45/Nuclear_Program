@@ -1,24 +1,27 @@
 object functions {
 	import globalVar._, countries._;
 
-	def pickNation() = {
+	def pickNation():country = {
 		var retry = false;
+		var ply:country = null;
 		echo( "Input nuclear power desired to simulate," );
 		do {
 			retry = false;
-			echo( "Choices include: United States, United Kingdom, France, China, Soviet Union." );
+			echo( "Choices include: [1]United States, [2]United Kingdom, [3]France, [4]China, [5]Soviet Union." );
 			var r = readLine().toLowerCase;
-			if ( usa.Nicks.contains( r ) ) { player = usa; untargetable_states = List( usa ); } //Alter this to include NATO / Warsaw pact.
-			else if ( sov.Nicks.contains( r ) ) { player = sov; untargetable_states = List( sov ); }
-			else if ( fra.Nicks.contains( r ) ) { player = fra; untargetable_states = List( fra ); }
-			else if ( bri.Nicks.contains( r ) ) { player = bri; untargetable_states = List( bri ); }
-			else if ( chi.Nicks.contains( r ) ) { player = chi; untargetable_states = List( chi ); }
+			if 		( usa.Nicks.contains( r ) || r == "1") { ply = usa; untargetable_states = List( usa ); } //Alter this to include NATO / Warsaw pact.
+			else if ( bri.Nicks.contains( r ) || r == "2") { ply = bri; untargetable_states = List( bri ); }
+			else if ( fra.Nicks.contains( r ) || r == "3") { ply = fra; untargetable_states = List( fra ); }
+			else if ( chi.Nicks.contains( r ) || r == "4") { ply = chi; untargetable_states = List( chi ); }
+			else if ( sov.Nicks.contains( r ) || r == "5") { ply = sov; untargetable_states = List( sov ); }
 			else {
 				retry = true;
 				echo( "Invalid choice. Retry." );
 			}
 		} while ( retry );
-		echo( "Now simulating: " + player.Name );
+		echo( "Now simulating: " + ply.Name );
+		
+		return ply;
 	};
 
 	/* --- Statistics functions --- */

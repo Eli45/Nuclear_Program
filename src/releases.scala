@@ -1,17 +1,3 @@
-//Note:
-/*
- * game_manager attack method should take 2 countries: attacker, defender and should direct each of these countries to attack eachother with their respective attack methods within countries.class
- * gm bug on line 123:	https://github.com/Eli45/Nuclear_Program/blob/master/src/game_manager.scala#L123
- 	if ( r != "" ) {
-		println( "No nuclear weapons exchanged currently." );
-		repeat = false;
-	}
- * Should be:
- 	if ( r == "")	{
- 		stuff
- 	}
-*/
-
 object releases {
 	class version( major: Int, minor: Int, patch1: Int, patch2: Int ) {
 		private final val MAJOR = major;
@@ -20,16 +6,39 @@ object releases {
 		private final val PATCH2 = patch2;
 		final val vers = this.MAJOR + "." + this.MINOR + "." + this.PATCH1 + "." + this.PATCH2;
 	};
-	final val release = new version( 0, 0, 3, 3 );
+	final val release = new version( 0, 0, 4, 0 );
 }; /** Changelogs:
+
+BUILD v0.0.4.0:
+created file countryJSON.scala:
+	uses JSON info of country populations in 2014 to create a hashmap.
+	
+in file countries.scala:
+	created mutable list countryList to contain a list of all countries contained within the provided JSON info.
+	old system is still present however eventually alliance system and will somehow need to be created to be compatible with the JSON system.
+	
+in file game_manager.scala:
+	fixed "No nuclear weapons exchanged" bug.
+	made choosing your country easier.
+	made presentation of date and command choice better.
+	implemented new Month class.
+
+in file main.scala:
+	removed dependency on global variable player.
+	
+in file globalVar.scala:
+	removed global variable player.
+	
+created file month.scala: 
+	class Month will represent month better and make our depiction of time passing more obvious to the user.
+---------------
 
 BUILD v0.0.3.3:
 in file game_manager.scala:
 	created help option in turn.
 	created terminate option in turn.
 	
-too lazy to do anything please send help.
-
+---------------
 
 BUILD v0.0.3.0:
 
@@ -37,8 +46,8 @@ re-did country system so that each country is treated equally under the same cla
 this solves the problem of requiring method overloading for every method in which we must deal with both nuclear states and non nuclear states.
 
 in countries.scala and game_manager.scala:
-	All countries now treated as the same class.
-	Deprecated non_nuke_country class.
+	all countries now treated as the same class.
+	deprecated non_nuke_country class.
 	moved Defcon variable to a country-by-country basis.
 	moved max_nukes variable to a country-by-country basis.]
 	created method update_max_nukes() for updating max_nukes available to fire.
@@ -46,8 +55,8 @@ in countries.scala and game_manager.scala:
 	created method give_nukes() for giving the country ( or taking away ) a specified number of nukes.
 
 in all other files:
-	Fixed various bugs that occurred because of this change.
-	Removed various un-needed variables and methods that are now useless because of this change.
+	fixed various bugs that occurred because of this change.
+	removed various un-needed variables and methods that are now useless because of this change.
 
 ---------------
 
@@ -118,7 +127,7 @@ created in file globalVar.scala:
 ---------------
 
 BUILD v0.0.1.1:
-Slightly changes releases.scala version class.
+slightly changes releases.scala version class.
 
 ---------------
 
@@ -131,15 +140,15 @@ created new file: releases.scala:
 
 
 in functions.scala:
-	Made convert_non_nuclear_state method less slightly wordy.
-	Changed printed strings to be more 'immersive'.
+	made convert_non_nuclear_state method less slightly wordy.
+	changed printed strings to be more 'immersive'.
 
 in player_events, scripted_events.scala:
-	Changed file structure of player_events and scripted_events and made it use the game manager 'better'.
+	changed file structure of player_events and scripted_events and made it use the game manager 'better'.
 
 in countries.scala:
-	Renamed West German and East German variables to follow 3 character length variable name rules for country variable names.
-	Added some more non nuclear countries(with placeholder populations):
+	renamed West German and East German variables to follow 3 character length variable name rules for country variable names.
+	added some more non nuclear countries(with placeholder populations):
 		Switzerland
 		Italy
 		Yugoslavia

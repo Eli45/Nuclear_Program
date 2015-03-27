@@ -1,4 +1,7 @@
 object countries {
+	import countryJSON._;
+	import scala.collection.mutable.MutableList;
+	
 	class country( _Name: String, _Population: Long, _Nukes: Int ) { //Nuclear countries.
 		var Name = _Name;
 		var Pop = _Population;
@@ -34,8 +37,28 @@ object countries {
 	fra.setNicks( fraNicks );
 	bri.setNicks( briNicks );
 	chi.setNicks( chiNicks );
+	
+	/*--[ 			EXPERIMENTAL		 ]--*/
+	/*--[ SHOULD BE USED AT A LATER DATE ]--*/
+	private val countryList:MutableList[country] = MutableList();
+	
+	private val keys   = countriesJSON.keysIterator.toList;
+	private val values = countriesJSON.valuesIterator.map{ _.toLong }.toList;
+	for (i <- 0 to countriesJSON.size - 1)
+	{
+		var nukeNumber = 0;
+		
+		if 		(keys(i).toLowerCase().equals("united states"))		{ nukeNumber = 23368; };
+		else if (keys(i).toLowerCase().equals("china"))				{ nukeNumber = 39197; };
+		else if (keys(i).toLowerCase().equals("united kingdom"))	{ nukeNumber = 360;   };
+		else if (keys(i).toLowerCase().equals("france"))			{ nukeNumber = 422;   };
+		else if (keys(i).toLowerCase().equals("russia"))			{ nukeNumber = 243;   };
+		
+		countryList += new country(keys(i), values(i), nukeNumber);
+	};
+	
 
-	//DEPRECATED:
+	//REMOVED:
 	/*
 	class non_nuke_country(_Name:String, _Population:Long)	{
 		var Name = _Name;
@@ -47,6 +70,7 @@ object countries {
 	};
 	*/
 
+	/*--[ OLD STYLE ]--*/
 	//NON NUCLEAR COUNTRIES BELOW:
 	var wgr = new country( "West Germany", 61020000, 0 ); //Check this for validity.
 	var egr = new country( "East Germany", 16568000, 0 ); //Population estimate.
@@ -93,4 +117,5 @@ object countries {
 		List( "east germany", "east germans", "eger" ) //East germany.
 	);
 	private val nonNukeCountries: List[country] = List();
+	
 };
